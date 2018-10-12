@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="textPrimary">#000000</color>
+    <color name="textSecondary">#211f1f</color>
+    <color name="textTertiary">#767575</color>
+    <color name="textLabel">#5b5a5a</color>
+
+
+    <color name="appBlack">#000000</color>
+    <color name="appWhite">#ffffff</color>
+    <color name="appSecondaryBlack">#a4a4a4</color>
+    <color name="appCallBtnBlue">#FF195796</color>
+    <color name="appCallEnd">#8c0714</color>
+    <color name="appCallEndLight">#c60719</color>
+
+</resources>

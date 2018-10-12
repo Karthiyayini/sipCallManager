@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/clMain"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appSecondaryBlack"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rlDialerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="#fff"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivShowNumber"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_password_eye" />
+
+        <TextView
+            android:id="@+id/txtPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#000"
+            android:textSize="25dp" />
+
+        <ImageView
+            android:id="@+id/ivBackspace"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_backspace_arrow" />
+    </RelativeLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clDialerPad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:weightSum="4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rlDialerView"
+        app:layout_constraintBottom_toTopOf="@+id/llCallForm">
+
+        <LinearLayout
+            android:id="@+id/llPad1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="@+id/clDialerPad"
+            app:layout_constraintStart_toStartOf="@+id/clDialerPad"
+            app:layout_constraintTop_toTopOf="@+id/clDialerPad">
+
+            <Button
+                android:id="@+id/btnOne"
+                style="@style/MyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_one_grey"
+                android:padding="25dp"
+                android:text="@string/key1_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnTwo"
+                style="@style/MyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_two_grey"
+                android:padding="25dp"
+                android:text="@string/key2_Value"
+                android:textAlignment="center"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnThree"
+                style="@style/MyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_three_grey"
+                android:padding="25dp"
+                android:text="@string/key3_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPad2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="@+id/llPad1"
+            app:layout_constraintStart_toStartOf="@+id/llPad1"
+            app:layout_constraintTop_toBottomOf="@+id/llPad1">
+
+            <Button
+                android:id="@+id/btnFour"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_four_grey"
+                android:padding="25dp"
+                android:text="@string/key4_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnFive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_five_grey"
+                android:padding="25dp"
+                android:text="@string/key5_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnSix"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_six_grey"
+                android:padding="25dp"
+                android:text="@string/key6_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPad3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="@+id/llPad2"
+            app:layout_constraintStart_toStartOf="@+id/llPad2"
+            app:layout_constraintTop_toBottomOf="@+id/llPad2">
+
+            <Button
+                android:id="@+id/btnSeven"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_seven_grey"
+                android:padding="25dp"
+                android:text="@string/key7_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnEight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_eight_grey"
+                android:padding="25dp"
+                android:text="@string/key8_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnNine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_nine_grey"
+                android:padding="25dp"
+                android:text="@string/key9_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPad4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="@+id/llPad3"
+            app:layout_constraintStart_toStartOf="@+id/llPad3"
+            app:layout_constraintTop_toBottomOf="@+id/llPad3">
+
+            <Button
+                android:id="@+id/btnAterisk"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:text="@string/ketAterisk"
+                android:textColor="@color/appWhite"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btnZero"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:drawableTop="@drawable/ic_zero_grey"
+                android:padding="25dp"
+                android:textAlignment="center"
+                android:text="@string/key0_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnHash"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appSecondaryBlack"
+                android:text="@string/keyHash"
+                android:textColor="@color/appWhite"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/llCallForm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clDialerPad">
+
+        <Button
+            android:id="@+id/btnEndCall"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="0.5"
+            android:background="@color/appCallEndLight"
+            android:drawableLeft="@drawable/ic_call_end"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="35dp"
+            android:text="@string/callEndCall"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnHideKeypad"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="0.5"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/callHideKeypad"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

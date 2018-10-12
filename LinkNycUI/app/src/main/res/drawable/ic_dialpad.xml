@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:viewportWidth="384"
+    android:viewportHeight="384"
+    android:width="384dp"
+    android:height="384dp">
+    <path
+        android:pathData="M32 0l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M160 0l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M288 0l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M32 106.667l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M160 106.667l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M288 106.667l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M32 213.33299l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M160 213.33299l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M160 320l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+    <path
+        android:pathData="M288 213.33299l64 0 0 64 -64 0z"
+        android:fillColor="@color/appWhite" />
+</vector>

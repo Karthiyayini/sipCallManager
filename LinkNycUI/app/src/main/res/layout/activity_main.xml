@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rlDialerView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ivHidePassword"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:onClick="buttonClickEvent"
+            android:src="@drawable/ic_password_eye" />
+
+        <TextView
+            android:id="@+id/txtPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#000"
+            android:textSize="25dp" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/btnBackspace"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:onClick="buttonClickEvent"
+            android:src="@drawable/ic_backspace_arrow" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llTextMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/rlDialerView"
+        app:layout_constraintStart_toStartOf="@+id/rlDialerView"
+        app:layout_constraintTop_toBottomOf="@+id/rlDialerView">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialer_string"
+            android:textColor="@color/textTertiary"
+            android:textStyle="bold"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:paddingLeft="8dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_vonage_logo" />
+
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clDialerPad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTextMessage">
+
+        <LinearLayout
+            android:id="@+id/llPad1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="@+id/clDialerPad"
+            app:layout_constraintStart_toStartOf="@+id/clDialerPad"
+            app:layout_constraintTop_toTopOf="@+id/clDialerPad">
+
+            <Button
+                android:id="@+id/btnOne"
+                style="@style/MyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_one_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key1_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnTwo"
+                style="@style/MyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_two_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key2_Value"
+                android:textAlignment="center"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnThree"
+                style="@style/MyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_three_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key3_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPad2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="@+id/llPad1"
+            app:layout_constraintStart_toStartOf="@+id/llPad1"
+            app:layout_constraintTop_toBottomOf="@+id/llPad1">
+
+            <Button
+                android:id="@+id/btnFour"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_four_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key4_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnFive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_five_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key5_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnSix"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_six_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key6_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPad3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="@+id/llPad2"
+            app:layout_constraintStart_toStartOf="@+id/llPad2"
+            app:layout_constraintTop_toBottomOf="@+id/llPad2">
+
+            <Button
+                android:id="@+id/btnSeven"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_seven_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key7_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnEight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_eight_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key8_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnNine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_nine_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:text="@string/key9_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPad4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="@+id/llPad3"
+            app:layout_constraintStart_toStartOf="@+id/llPad3"
+            app:layout_constraintTop_toBottomOf="@+id/llPad3">
+
+            <Button
+                android:id="@+id/btnAterisk"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:onClick="buttonClickEvent"
+                android:text="@string/ketAterisk"
+                android:textColor="@color/appWhite"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btnZero"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:drawableTop="@drawable/ic_zero_black"
+                android:onClick="buttonClickEvent"
+                android:padding="25dp"
+                android:textAlignment="center"
+                android:text="@string/key0_Value"
+                android:textColor="@color/textLabel"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/btnHash"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/appBlack"
+                android:onClick="buttonClickEvent"
+                android:text="@string/keyHash"
+                android:textColor="@color/appWhite"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPad5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/llPad4"
+            app:layout_constraintStart_toStartOf="@+id/llPad4"
+            app:layout_constraintTop_toBottomOf="@+id/llPad4">
+
+            <ImageView
+                android:id="@+id/btnMakeCall"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                style="@style/MyButtonStyle"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_circular_boarder"
+                android:elevation="6dp"
+                android:onClick="buttonClickEvent"
+                android:padding="15dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_call_phone"
+                tools:ignore="ContentDescription,UnusedAttribute" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
