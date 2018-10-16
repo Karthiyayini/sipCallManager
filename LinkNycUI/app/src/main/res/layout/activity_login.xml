@@ -41,6 +41,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:imeOptions="actionNext"
             android:hint="User ID" />
 
     </android.support.design.widget.TextInputLayout>
@@ -63,6 +64,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:imeOptions="actionNext"
             android:hint="Password"
             android:inputType="textPassword" />
 
@@ -75,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:imeOptions="actionNext"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +90,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:ems="10"
+        android:imeOptions="actionNext"
         android:hint="Domain" />
 
     </android.support.design.widget.TextInputLayout>
@@ -100,6 +104,7 @@
         android:text="Login"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:imeOptions="actionGo"
         android:onClick="loginInitiated"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

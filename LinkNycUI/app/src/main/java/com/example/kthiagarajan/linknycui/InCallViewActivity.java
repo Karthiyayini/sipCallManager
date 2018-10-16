@@ -2,8 +2,11 @@ package com.example.kthiagarajan.linknycui;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.sip.SipAudioCall;
@@ -25,27 +28,37 @@ import android.widget.Toast;
 public class InCallViewActivity extends AppBaseActivity {
 
     TextView mEdtPhoneNo;
+    Button mBtnZero;
     ProgressBar mVolumeBar;
     int mProgressValue;
-    Button mBtnEndCall,mBtnHideKeypad,mKeyOne,mKeyTwo,
+    public static Button mBtnEndCall,mBtnHideKeypad,mKeyOne,mKeyTwo,
             mKeyThree,mKeyFour,mKeyFive,mKeySix,mKeySeven,mKeyEight,mKeyNine,
             mKeyZero,mKeyAterisk,mKeyHash;
     ImageView mIvBackSpace,mIvShowNumber;
     int nCallStatus=0;
+    public  static Context inCallContext;
+    public static MyReceiver myReceiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        MySipManager.getInstance().setIsMakeCall(true);
         setContentView(R.layout.activity_in_call_view);
-            init();
+        init();
+        super.onCreate(savedInstanceState);
     }
 
     private void init() {
         mVolumeBar = (ProgressBar) findViewById(R.id.pbVolumeBar);
         nCallStatus = MySipManager.getInstance().getCallStatus();
+        inCallContext=getApplicationContext();
         if (nCallStatus == 0)
         {
             initiateCall();
+
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("android.Sip.END_CALL");
+            myReceiver = new MyReceiver();
+            this.registerReceiver(myReceiver, filter);
         }
     }
 
@@ -93,7 +106,7 @@ public class InCallViewActivity extends AppBaseActivity {
     {
         MySipManager.getInstance().setIsMakeCall(false);
         endIniatedCall();
-        Intent myIntend = new Intent(this,MainActivity.class);
+        Intent myIntend = new Intent(inCallContext,MainActivity.class);
         myIntend.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(myIntend);
     }
@@ -106,7 +119,6 @@ public class InCallViewActivity extends AppBaseActivity {
                     dialog.setContentView(R.layout.dialog_keypad);
                     initValues(dialog);
                     setClickListener(dialog);
-
                     mBtnEndCall.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -118,6 +130,15 @@ public class InCallViewActivity extends AppBaseActivity {
                         @Override
                         public void onClick(View view) {
                             dialog.dismiss();
+                        }
+                    });
+                    mKeyZero.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            String mPhoneNo = mEdtPhoneNo.getText().toString();
+                            mPhoneNo += "+";
+                            mEdtPhoneNo.setText(mPhoneNo);
+                            return false;
                         }
                     });
                     dialog.show();
@@ -159,9 +180,6 @@ public class InCallViewActivity extends AppBaseActivity {
         } catch (Exception ex) {
         }
     }
-
-
-
 
     public void initValues(Dialog dialog)
     {
@@ -359,5 +377,29 @@ public class InCallViewActivity extends AppBaseActivity {
 
         return null;
 
+    }
+
+    public class MyReceiver extends BroadcastReceiver {
+        public MyReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(context, "Action: " + intent.getAction(), Toast.LENGTH_SHORT).show();
+            MySipManager.getInstance().setIsMakeCall(false);
+            endIniatedCall();
+            Intent myIntend = new Intent(inCallContext,MainActivity.class);
+            myIntend.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(myIntend);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (myReceiver!=null)
+        {
+            unregisterReceiver(myReceiver);
+        }
     }
 }

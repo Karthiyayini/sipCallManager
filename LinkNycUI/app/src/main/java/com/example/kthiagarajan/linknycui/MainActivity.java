@@ -47,6 +47,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppBaseActivity {
 
     TextView edtPhoneNo;
+    Button mBtnZero;
     static Context context = null;
     static Intent intent = null;
     private final int REQUEST_USE_SIP = 1;
@@ -59,10 +60,25 @@ public class MainActivity extends AppBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requestPermissions();
+//        requestPermissions();
         edtPhoneNo = (TextView) findViewById(R.id.txtPhoneNumber);
         context = getApplicationContext();
         intent = getIntent();
+
+        init();
+        Log.d(this.toString(), "onCreate: "+MySipManager.getInstance().getIsMakeCall());
+
+        if (!MySipManager.getInstance().getIsMakeCall()) {
+            Log.d(this.toString(), "onCreate: "+((MySipManager.getInstance().getIsMakeCall())==false));
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("android.Sip.INCOMING_CALL");
+            callReceiver = new IncomingCallReceiver();
+            this.registerReceiver(callReceiver, filter);
+            initializeManager();
+        }
+    }
+
+    private void init() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -101,18 +117,27 @@ public class MainActivity extends AppBaseActivity {
                 }
         );
 
-        initializeManager();
+        mBtnZero =(Button)findViewById(R.id.btnZero);
+        mBtnZero.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                String phoneNo = edtPhoneNo.getText().toString();
+                phoneNo += "+";
+                edtPhoneNo.setText(phoneNo);
+                return true;
+            }
+        });
     }
 
-    private void requestPermissions() {
-
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.USE_SIP);
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.USE_SIP}, REQUEST_USE_SIP);
-        } else {
-        }
-    }
+//    private void requestPermissions() {
+//
+//        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.USE_SIP);
+//
+//        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.USE_SIP}, REQUEST_USE_SIP);
+//        } else {
+//        }
+//    }
 
     private class HiddenPassTransformationMethod extends PasswordTransformationMethod {
 
@@ -248,6 +273,13 @@ public class MainActivity extends AppBaseActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (callReceiver != null) {
+            this.unregisterReceiver(callReceiver);
+        }
+    }
 }
 
 

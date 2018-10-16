@@ -36,23 +36,18 @@ public class AppBaseActivity extends Activity {
     public static SipManager manager = null;
     public static SipProfile me = null;
     public static SipAudioCall call = null;
-    public static IncomingCallReceiver callReceiver;
+    public static IncomingCallReceiver callReceiver = null;
     public static int CALL_NONE = 0;
     public static int CALL_CALLING = 1;
     public static int CALL_ESTABLISHED = 2;
     public static int CALL_ENDED = 3;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("onCreate", "onCreate: "+MySipManager.getInstance().getIsMakeCall());
-//        if (!MySipManager.getInstance().getIsMakeCall()) {
+        Log.d(this.toString(), "onCreate: "+MySipManager.getInstance().getIsMakeCall());
 
-            IntentFilter filter = new IntentFilter();
-            filter.addAction("android.Sip.INCOMING_CALL");
-            callReceiver = new IncomingCallReceiver();
-            this.registerReceiver(callReceiver, filter);
-//        }
     }
 
     public void initializeManager() {
@@ -134,13 +129,6 @@ public class AppBaseActivity extends Activity {
             this.runOnUiThread(new Runnable() {
                 public void run() {
                     showToast(getResources().getString(R.string.MsgSipReady));
-//                            Intent myIntent = new Intent(context, InCallViewActivity.class);
-//                            myIntent.putExtra("makeACallTo",sipAddress);
-//                            MySipManager.getInstance().setSipManager(manager);
-//                            MySipManager.getInstance().setSipProfile(me);
-//                            MySipManager.getInstance().setSipAudioCall(call);
-//                            myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                            startActivity(myIntent);
                 }
             });
 
@@ -160,10 +148,6 @@ public class AppBaseActivity extends Activity {
                     showToast(getResources().getString(R.string.MsgSipFailed));
                 }
             });
-//                    destroyOnCallEnd();
-//                    Intent myIntend = new Intent(this,LoginActivity.class);
-//                    myIntend.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    startActivity(myIntend);
         }
     }
 
@@ -173,9 +157,6 @@ public class AppBaseActivity extends Activity {
 
         try {
             SipAudioCall.Listener listener = new SipAudioCall.Listener() {
-                // Much of the client's interaction with the SIP Stack will
-                // happen via listeners.  Even making an outgoing call, don't
-                // forget to set up a listener to set things up once the call is established.
 
                 @Override
                 public void onCalling(SipAudioCall call) {
@@ -198,6 +179,9 @@ public class AppBaseActivity extends Activity {
                 @Override
                 public void onCallEnded(SipAudioCall call) {
                     MySipManager.getInstance().setCallStatus(CALL_ENDED);
+                    Intent intent = new Intent();
+                    intent.setAction("android.Sip.END_CALL");
+                    sendBroadcast(intent);
                     Log.d(this.toString(),"CallEnded");
                     showToast("Call Ended.");
                 }
@@ -232,12 +216,9 @@ public class AppBaseActivity extends Activity {
         updateStatus(useName + "@" + call.getPeerProfile().getSipDomain());
     }
 
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        destroyOnCallEnd();
     }
 
     public void destroyOnCallEnd()
@@ -251,7 +232,7 @@ public class AppBaseActivity extends Activity {
         }
     }
 
-    public void endIniatedCall() {
+    public static void endIniatedCall() {
         if(call != null) {
             try {
                 call.endCall();
@@ -261,7 +242,6 @@ public class AppBaseActivity extends Activity {
             }
             call.close();
         }
-        destroyOnCallEnd();
     }
 
     public void showToast(String message) {
@@ -276,8 +256,8 @@ public class AppBaseActivity extends Activity {
         toast.show();
     }
 
-
     public void muteCall() {
+        call.setSpeakerMode(true);
 
         if (call.isMuted())
         {
@@ -293,14 +273,12 @@ public class AppBaseActivity extends Activity {
     public void increaseVolume()
     {
         AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
+        audioManager.adjustStreamVolume(AudioManager.STREAM_VOICE_CALL, AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
     }
 
     public void decreaseVolume()
     {
         AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
+        audioManager.adjustStreamVolume(AudioManager.STREAM_VOICE_CALL, AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
     }
-
-
 }

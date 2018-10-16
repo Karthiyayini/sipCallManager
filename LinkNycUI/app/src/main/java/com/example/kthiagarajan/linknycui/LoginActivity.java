@@ -19,6 +19,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
+
 public class LoginActivity extends Activity {
 
     Button mBtnLogin;
@@ -26,6 +30,8 @@ public class LoginActivity extends Activity {
     String mUserId=null, mPassword, mDomain;
 
     private final int REQUEST_USE_SIP=1;
+    private final int REQUEST_MICROPHONE = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,9 @@ public class LoginActivity extends Activity {
     }
 
     private void init() {
+
+        Fabric.with(this, new Crashlytics());
+        logUser();
 
         mBtnLogin = (Button) findViewById(R.id.btnLogin);
         mEtUserId = (TextInputEditText) findViewById(R.id.etUserId);
@@ -50,6 +59,13 @@ public class LoginActivity extends Activity {
             startActivity(myIntent);
         }
     }
+
+    private void logUser() {
+        Crashlytics.setUserIdentifier("12345");
+        Crashlytics.setUserEmail("user@fabric.io");
+        Crashlytics.setUserName("Test User");
+    }
+
 
     private Boolean checkPrefSettings() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -95,13 +111,18 @@ public class LoginActivity extends Activity {
 
     private void requestPermissions() {
 
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.USE_SIP);
+        String[] permissionList = new String[2];
 
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.USE_SIP}, REQUEST_USE_SIP);
-        } else {
-            Log.d(this.toString(),"");
-            showToast(getResources().getString(R.string.sipPermissionExist));
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.USE_SIP)) != PackageManager.PERMISSION_GRANTED) {
+            permissionList[0] = Manifest.permission.USE_SIP;
+        }
+
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)) != PackageManager.PERMISSION_GRANTED) {
+            permissionList[1] = Manifest.permission.RECORD_AUDIO;
+        }
+
+        if (permissionList[0]!=null || permissionList[1]!=null) {
+            ActivityCompat.requestPermissions(this, permissionList, REQUEST_USE_SIP);
         }
     }
 

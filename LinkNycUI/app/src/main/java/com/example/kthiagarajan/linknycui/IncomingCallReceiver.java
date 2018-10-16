@@ -67,7 +67,6 @@ public class IncomingCallReceiver extends BroadcastReceiver {
         @Override
         public void onCallEnded(SipAudioCall call) {
             super.onCallEnded(call);
-//            mainActivity.updateStatus(MainActivity.STATE_CONNECTED);
         }
     };
 

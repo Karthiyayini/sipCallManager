@@ -57,18 +57,16 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:weightSum="4"
+        app:layout_constraintBottom_toTopOf="@+id/llCallForm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rlDialerView"
-        app:layout_constraintBottom_toTopOf="@+id/llCallForm">
+        app:layout_constraintTop_toBottomOf="@+id/rlDialerView">
 
         <LinearLayout
             android:id="@+id/llPad1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="3"
@@ -121,9 +119,9 @@
             android:id="@+id/llPad2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="3"
-            android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="@+id/llPad1"
             app:layout_constraintStart_toStartOf="@+id/llPad1"
             app:layout_constraintTop_toBottomOf="@+id/llPad1">
@@ -170,9 +168,9 @@
             android:id="@+id/llPad3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="3"
-            android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="@+id/llPad2"
             app:layout_constraintStart_toStartOf="@+id/llPad2"
             app:layout_constraintTop_toBottomOf="@+id/llPad2">
@@ -218,9 +216,9 @@
             android:id="@+id/llPad4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="3"
-            android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="@+id/llPad3"
             app:layout_constraintStart_toStartOf="@+id/llPad3"
             app:layout_constraintTop_toBottomOf="@+id/llPad3">
@@ -243,8 +241,8 @@
                 android:background="@color/appSecondaryBlack"
                 android:drawableTop="@drawable/ic_zero_grey"
                 android:padding="25dp"
-                android:textAlignment="center"
                 android:text="@string/key0_Value"
+                android:textAlignment="center"
                 android:textColor="@color/textLabel"
                 android:textSize="10dp" />
 
@@ -266,26 +264,25 @@
         android:id="@+id/llCallForm"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="1"
+        app:layout_constraintTop_toBottomOf="@id/clDialerPad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clDialerPad">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnEndCall"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_margin="1dp"
             android:layout_weight="0.5"
             android:background="@color/appCallEndLight"
             android:drawableLeft="@drawable/ic_call_end"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:padding="35dp"
+            android:padding="15dp"
             android:text="@string/callEndCall"
             android:textColor="#fff"
             android:textSize="20sp" />
